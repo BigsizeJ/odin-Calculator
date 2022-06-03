@@ -54,6 +54,15 @@ class Calculator{
         this.currentOperand = ''
     }
 
+    sign(){
+        if(this.currentOperand.includes('-')){
+            this.currentOperand = this.currentOperand.replace('-', '')
+        }
+        else{
+            this.currentOperand = '-' + this.currentOperand
+        }
+    }
+
     appendNumber(number){
         if(number === '.' && this.currentOperand.includes('.')) return
         this.currentOperand = this.currentOperand.toString() + number.toString()
@@ -75,6 +84,7 @@ const clear = document.querySelector('[data-clear]')
 const operators = document.querySelectorAll('[data-function]')
 const equal = document.querySelector('[data-equal]')
 const del = document.querySelector('[data-del]')
+const sign = document.querySelector('[data-sign]')
 
 const currentOperandStr = document.querySelector('[data-current]')
 const previousOperandStr = document.querySelector('[data-previous]')
@@ -92,6 +102,11 @@ operators.forEach(button => button.addEventListener('click', () => {
     calculator.updateDisplay()
 }))
 
+sign.addEventListener('click', () => {
+    calculator.sign()
+    calculator.updateDisplay()
+})
+
 equal.addEventListener('click', () => {
     calculator.calculate()
     calculator.updateDisplay()
@@ -106,6 +121,7 @@ clear.addEventListener('click', () => {
     calculator.clear()
     calculator.updateDisplay()
 })
+
 
 window.addEventListener('keydown', (e) => {
     if(e.key >= 0 && e.key <= 9){
