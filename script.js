@@ -107,6 +107,21 @@ clear.addEventListener('click', () => {
     calculator.updateDisplay()
 })
 
-window.addEventListener('keydown', () => {
-    
+window.addEventListener('keydown', (e) => {
+    if(e.key >= 0 && e.key <= 9){
+        calculator.appendNumber(e.key)
+        calculator.updateDisplay()
+    }
+    if(e.key == '+' || e.key == '-' || e.key == '*' || e.key == '/'){
+        calculator.chooseOperator(e.key)
+        calculator.updateDisplay()
+    }
+    if(e.key === 'Enter'){
+        calculator.calculate()
+        calculator.updateDisplay()
+    }
+    if(e.key === 'Backspace'){
+        calculator.delete()
+        calculator.updateDisplay()
+    }
 })
